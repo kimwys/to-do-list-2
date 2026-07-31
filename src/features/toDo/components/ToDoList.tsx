@@ -46,7 +46,9 @@ export default function ToDoList({
 
       {/* ---------------- Desktop Header ---------------- */}
       <div className="hidden sm:flex items-center">
-        <Badge variant={status}>{status}</Badge>
+        <Badge variant={status} className="min-w-30">
+          {status}
+        </Badge>
         <div className="h-px flex-1 bg-border-primary" />
       </div>
 
@@ -91,7 +93,6 @@ export default function ToDoList({
     </div>
   );
 }
-
 
 // Cách 2: Mobile UI giống Desktop UI
 // import type { ToDo } from "@/src/features/toDo/types/toDo";
