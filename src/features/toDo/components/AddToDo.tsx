@@ -12,14 +12,14 @@ export default function AddToDo({ onAdd }: AddToDoProps) {
   const [toDoTitle, setToDoTitle] = useState<string>("");
   const [toDoStatus, setToDoStatus] = useState<Status>("active");
   return (
-    <div className="flex items-center mt-[100px] gap-[24px]">
+    <div className="flex flex-col items-center mt-10 gap-5 sm:flex-row sm:gap-6">
       <Input
         placeholder="Add a new task..."
         value={toDoTitle}
         onChange={(e) => setToDoTitle(e.target.value)}
-        className="w-[396.66px]"
+        className="sm:w-99"
       />
-      <div className="flex items-center gap-[24px]">
+      <div className="flex items-center gap-6">
         <Button
           variant="active"
           className={
@@ -49,19 +49,19 @@ export default function AddToDo({ onAdd }: AddToDoProps) {
         >
           closed
         </Button>
-
-        <Button
-          variant="add"
-          onClick={() => {
-            onAdd(toDoTitle, toDoStatus);
-            setToDoTitle("");
-          }}
-          disabled={toDoTitle.trim() === ""}
-        >
-          <Plus color="#FEFEFB" strokeWidth={2} size={24} />
-          add
-        </Button>
       </div>
+      <Button
+        variant="add"
+        className="w-full sm:w-auto gap-0.5 justify-center"
+        onClick={() => {
+          onAdd(toDoTitle, toDoStatus);
+          setToDoTitle("");
+        }}
+        disabled={toDoTitle.trim() === ""}
+      >
+        <Plus strokeWidth={2} size={24} />
+        add
+      </Button>
     </div>
   );
 }

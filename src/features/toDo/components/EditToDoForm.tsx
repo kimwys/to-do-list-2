@@ -63,37 +63,47 @@ export default function EditToDoForm({
         />
       </div>
 
-      <div className="flex items-center gap-[24px]">
-        <Button
-          variant="active"
-          type="button"
-          onClick={() => form.setValue("status", "active")}
-          className={status !== "active" ? "opacity-60 hover:opacity-100" : ""}
-        >
-          active
-        </Button>
-        <Button
-          variant="pending"
-          type="button"
-          onClick={() => form.setValue("status", "pending")}
-          className={status !== "pending" ? "opacity-60 hover:opacity-100" : ""}
-        >
-          pending
-        </Button>
-        <Button
-          variant="closed"
-          type="button"
-          onClick={() => form.setValue("status", "closed")}
-          className={status !== "closed" ? "opacity-60 hover:opacity-100" : ""}
-        >
-          closed
-        </Button>
+      <div className="flex flex-col gap-2">
+        <div className="font-semibold text-gray-500">Status:</div>
+
+        <div className="flex items-center gap-2">
+          <Button
+            variant="active"
+            type="button"
+            onClick={() => form.setValue("status", "active")}
+            className={
+              status !== "active" ? "opacity-60 hover:opacity-100" : ""
+            }
+          >
+            active
+          </Button>
+          <Button
+            variant="pending"
+            type="button"
+            onClick={() => form.setValue("status", "pending")}
+            className={
+              status !== "pending" ? "opacity-60 hover:opacity-100" : ""
+            }
+          >
+            pending
+          </Button>
+          <Button
+            variant="closed"
+            type="button"
+            onClick={() => form.setValue("status", "closed")}
+            className={
+              status !== "closed" ? "opacity-60 hover:opacity-100" : ""
+            }
+          >
+            closed
+          </Button>
+        </div>
       </div>
 
       <Button
         type="submit"
         disabled={form.formState.isSubmitting}
-        className="mt-2"
+        className="mt-2 justify-center"
         variant="update"
       >
         {buttonName}

@@ -21,12 +21,12 @@ export default function Home() {
   const closedToDo = toDoList.filter((todo) => todo.status === "closed");
 
   return (
-    <div className="ml-[220px] w-[1000px] py-[12px] mb-[50px]">
+    <div className="w-full max-w-250 mx-auto px-4 py-8">
       <ToDoHeader />
 
       <AddToDo onAdd={addToDo} />
 
-      <div className="flex flex-col gap-[26px]">
+      <div className="flex flex-col gap-6.5 mt-10">
         <ToDoList
           status="active"
           toDoList={activeToDo}

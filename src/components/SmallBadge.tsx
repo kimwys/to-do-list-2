@@ -10,14 +10,15 @@ type SmallBadgeProps = React.ComponentProps<"div"> & {
 export default function SmallBadge({
   variant,
   className = "",
+  children,
 }: SmallBadgeProps) {
   return (
     <div
-      className={`rounded-[1000px] px-[16px] py-[8px]
-        max-w-[97px]
-        font-bold text-background text-center ${variants[variant]} ${className}`}
+      className={`rounded-[1000px] px-4 py-2
+        font-bold text-background text-center 
+        ${variants[variant]} ${className}`}
     >
-      {variant}
+      {children}
     </div>
   );
 }

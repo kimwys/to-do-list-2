@@ -18,7 +18,6 @@ export default function DateInput({ value, onChange }: DateInputProps) {
   return (
     <DatePicker
       className="rounded-[49.41px]
-        max-h-[49.41px] max-w-[396.66px]
         w-full
         p-4
         border-[1.37px] border-border-primary 

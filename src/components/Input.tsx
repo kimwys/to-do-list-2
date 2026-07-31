@@ -7,7 +7,7 @@ export default function Input({ error, className = "", ...props }: InputProps) {
     <input
       {...props}
       className={`rounded-[49.41px]
-        max-h-[49.41px] max-w-[396.66px]
+        w-full
         p-4
         border-[1.37px] border-border-primary 
         enabled:hover:border-amber-500

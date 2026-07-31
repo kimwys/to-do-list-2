@@ -26,7 +26,7 @@ export default function EditToDoModal({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-      <div className="relative rounded bg-white p-6 w-96">
+      <div className="relative rounded-2xl bg-white p-6 ">
         <button
           type="button"
           onClick={onClose}
@@ -35,7 +35,7 @@ export default function EditToDoModal({
           <X size={20} />
         </button>
 
-        <h2 className="text-xl font-bold text-center text-primary-800">
+        <h2 className="text-xl font-bold text-center text-header-primary">
           Update Todo Item
         </h2>
 
