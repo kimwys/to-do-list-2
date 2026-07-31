@@ -66,7 +66,7 @@ export default function EditToDoForm({
       <div className="flex flex-col gap-2">
         <div className="font-semibold text-gray-500">Status:</div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2">
           <Button
             variant="active"
             type="button"
