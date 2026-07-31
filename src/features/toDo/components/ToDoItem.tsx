@@ -1,5 +1,6 @@
 import type { ToDo } from "@/src/features/toDo/types/toDo";
 import SmallBadge from "@/src/components/SmallBadge";
+import Button from "@/src/components/Button";
 import { SquarePen } from "lucide-react";
 import { Trash2 } from "lucide-react";
 
@@ -39,19 +40,13 @@ export default function ToDoItem({ toDo, onDelete, onEdit }: ToDoItemProps) {
       </div>
 
       <div className="flex gap-2 sm:gap-6.75 justify-self-center">
-        <button
-          className="hover:cursor-pointer hover:scale-110"
-          onClick={() => onEdit(toDo)}
-        >
+        <Button size="icon" onClick={() => onEdit(toDo)}>
           <SquarePen color="var(--color-pending)" size={20} />
-        </button>
+        </Button>
 
-        <button
-          className="hover:cursor-pointer hover:scale-110"
-          onClick={() => onDelete(toDo.id)}
-        >
+        <Button size="icon" onClick={() => onDelete(toDo.id)}>
           <Trash2 color="var(--color-closed)" size={20} />
-        </button>
+        </Button>
       </div>
     </div>
   );

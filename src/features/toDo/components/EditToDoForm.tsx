@@ -69,6 +69,7 @@ export default function EditToDoForm({
         <div className="flex items-center justify-center gap-2">
           <Button
             variant="active"
+            size="small"
             type="button"
             onClick={() => form.setValue("status", "active")}
             className={
@@ -79,6 +80,7 @@ export default function EditToDoForm({
           </Button>
           <Button
             variant="pending"
+            size="small"
             type="button"
             onClick={() => form.setValue("status", "pending")}
             className={
@@ -89,6 +91,7 @@ export default function EditToDoForm({
           </Button>
           <Button
             variant="closed"
+            size="small"
             type="button"
             onClick={() => form.setValue("status", "closed")}
             className={
