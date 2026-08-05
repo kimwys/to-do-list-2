@@ -1,7 +1,7 @@
 "use client";
-import type { ToDo } from "@/src/features/toDo/types/toDo";
-import EditToDoForm from "@/src/features/toDo/components/EditToDoForm";
-import { EditToDoFormValues } from "@/src/features/toDo/schemas/editTodo.schema";
+import type { ToDo } from "@/features/toDo/types/toDo";
+import EditToDoForm from "@/features/toDo/components/EditToDoForm";
+import { EditToDoFormValues } from "@/features/toDo/schemas/editTodo.schema";
 import { toast } from "sonner";
 import { X } from "lucide-react";
 import { useEffect } from "react";
@@ -36,7 +36,7 @@ export default function EditToDoModal({
   return (
     <div className="fixed inset-0 bg-black/50 p-4">
       <div className="flex min-h-full items-center justify-center">
-        <div className="relative w-full max-w-max max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6">
+        <div className="relative w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-6">
           <button
             type="button"
             onClick={onClose}
@@ -54,7 +54,6 @@ export default function EditToDoModal({
               title: toDo.title,
               createdAt: toDo.createdAt,
               doneAt: toDo.doneAt || "",
-              status: toDo.status,
             }}
             buttonName="Update"
             onSubmit={handleUpdate}

@@ -1,10 +1,10 @@
 const variants = {
   active: "bg-active text-background",
-  pending: "bg-pending text-background",
-  closed: "bg-closed text-background",
+  overdue: "bg-overdue text-background",
+  completed: "bg-completed text-background",
 };
 type SmallBadgeProps = React.ComponentProps<"div"> & {
-  variant: "active" | "pending" | "closed";
+  variant: "active" | "overdue" | "completed";
 };
 
 export default function SmallBadge({

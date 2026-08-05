@@ -1,7 +1,7 @@
-import type { ToDo } from "@/src/features/toDo/types/toDo";
-import type { ApiResponse } from "@/src/types/apiResponse";
-import mockDelay from "@/src/services/mockDelay.service";
-import { loadLocalStorage, saveLocalStorage } from "@/src/utils/localStorage";
+import type { ToDo } from "@/features/toDo/types/toDo";
+import type { ApiResponse } from "@/types/apiResponse";
+import mockDelay from "@/services/mockDelay.service";
+import { loadLocalStorage, saveLocalStorage } from "@/utils/localStorage";
 
 export async function getToDoList(): Promise<ApiResponse<ToDo[]>> {
   await mockDelay(1000);

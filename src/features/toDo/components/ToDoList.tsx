@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-import Badge from "@/src/components/Badge";
-import Button from "@/src/components/Button";
-import ToDoItem from "@/src/features/toDo/components/ToDoItem";
+import Badge from "@/components/Badge";
+import { Button } from "@/components/ui/button";
+import ToDoItem from "@/features/toDo/components/ToDoItem";
 
 import type { Status, ToDo } from "../types/toDo";
 
@@ -13,6 +13,7 @@ type ToDoListProps = {
   toDoList: ToDo[];
   onDelete: (id: string) => void;
   onEdit: (todo: ToDo) => void;
+  onToggleCompleted: (id: string, isCompleted: boolean) => void;
 };
 
 export default function ToDoList({
@@ -20,6 +21,7 @@ export default function ToDoList({
   toDoList,
   onDelete,
   onEdit,
+  onToggleCompleted,
 }: ToDoListProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,6 +30,7 @@ export default function ToDoList({
       {/* ---------------- Mobile Header ---------------- */}
       <Button
         variant={status}
+        size="toDoDefault"
         onClick={() => setIsOpen((prev) => !prev)}
         className="justify-between sm:hidden"
       >
@@ -44,10 +47,26 @@ export default function ToDoList({
         />
       </Button>
 
+      {/* ------------- Mobile Table Header ------------- */}
+      <div
+        className={`
+        ${toDoList.length === 0 || !isOpen ? "hidden" : "grid grid-cols-[1fr_2fr_1fr]"}
+        sm:hidden
+        px-5
+        text-foreground
+        text-center
+        opacity-50 
+        `}
+      >
+        <div></div>
+        <div>Deadline Date</div>
+        <div></div>
+      </div>
+
       {/* ---------------- Desktop Header ---------------- */}
       <div className="hidden sm:flex items-center">
-        <Badge variant={status} className="min-w-30">
-          {status}
+        <Badge variant={status} className="min-w-35">
+          {status.charAt(0).toUpperCase() + status.slice(1)}
         </Badge>
         <div className="h-px flex-1 bg-border-primary" />
       </div>
@@ -57,7 +76,8 @@ export default function ToDoList({
         className="
           hidden
           sm:grid
-          sm:grid-cols-[2fr_2fr_2fr_2fr_1fr]
+          sm:grid-cols-[1fr_1fr_1fr_1fr]
+          md:grid-cols-[2fr_2fr_2fr_2fr_1fr]
           items-center
           justify-items-center
           px-9
@@ -66,7 +86,7 @@ export default function ToDoList({
         "
       >
         <div />
-        <div>Created Date</div>
+        <div className="sm:hidden md:block">Created Date</div>
         <div>Deadline Date</div>
         <div>Status</div>
         <div />
@@ -75,6 +95,7 @@ export default function ToDoList({
       {/* ---------------- Todo Items ---------------- */}
       <div
         className={`
+          ${toDoList.length === 0 ? "hidden" : ""}
           ${isOpen ? "flex" : "hidden"}
           flex-col
           gap-3
@@ -87,6 +108,7 @@ export default function ToDoList({
             toDo={todo}
             onDelete={onDelete}
             onEdit={onEdit}
+            onToggleCompleted={onToggleCompleted}
           />
         ))}
       </div>

@@ -1,24 +1,31 @@
 "use client";
-import { ToDo } from "@/src/features/toDo/types/toDo";
-import ToDoHeader from "@/src/features/toDo/components/ToDoHeader";
-import AddToDo from "@/src/features/toDo/components/AddToDo";
-import ToDoList from "@/src/features/toDo/components/ToDoList";
-import LoadingState from "@/src/components/LoadingState";
-import useToDo from "@/src/features/toDo/hooks/useToDo";
+import { ToDo } from "@/features/toDo/types/toDo";
+import ToDoHeader from "@/features/toDo/components/ToDoHeader";
+import AddToDo from "@/features/toDo/components/AddToDo";
+import ToDoList from "@/features/toDo/components/ToDoList";
+import LoadingState from "@/components/LoadingState";
+import useToDo from "@/features/toDo/hooks/useToDo";
 import { useState } from "react";
-import EditToDoModal from "@/src/features/toDo/components/EditToDoModal";
+import EditToDoModal from "@/features/toDo/components/EditToDoModal";
 
 export default function Home() {
-  const { toDoList, addToDo, deleteToDo, editToDo, isLoading } = useToDo();
+  const {
+    toDoList,
+    addToDo,
+    deleteToDo,
+    editToDo,
+    markAsCompleted,
+    isLoading,
+  } = useToDo();
   const [editingToDo, setEditingToDo] = useState<ToDo | null>(null);
 
   if (isLoading) {
-    return <LoadingState message={"Đang tải dữ liệu..."} />;
+    return <LoadingState message={"Data is loading, please wait..."} />;
   }
 
   const activeToDo = toDoList.filter((todo) => todo.status === "active");
-  const pendingToDo = toDoList.filter((todo) => todo.status === "pending");
-  const closedToDo = toDoList.filter((todo) => todo.status === "closed");
+  const overdueToDo = toDoList.filter((todo) => todo.status === "overdue");
+  const completedToDo = toDoList.filter((todo) => todo.status === "completed");
 
   return (
     <div className="w-full max-w-250 mx-auto px-4 py-8">
@@ -32,18 +39,21 @@ export default function Home() {
           toDoList={activeToDo}
           onDelete={deleteToDo}
           onEdit={setEditingToDo}
+          onToggleCompleted={markAsCompleted}
         />
         <ToDoList
-          status="pending"
-          toDoList={pendingToDo}
+          status="overdue"
+          toDoList={overdueToDo}
           onDelete={deleteToDo}
           onEdit={setEditingToDo}
+          onToggleCompleted={markAsCompleted}
         />
         <ToDoList
-          status="closed"
-          toDoList={closedToDo}
+          status="completed"
+          toDoList={completedToDo}
           onDelete={deleteToDo}
           onEdit={setEditingToDo}
+          onToggleCompleted={markAsCompleted}
         />
       </div>
 

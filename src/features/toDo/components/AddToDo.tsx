@@ -1,61 +1,40 @@
-import Button from "@/src/components/Button";
-import Input from "@/src/components/Input";
+import { Button } from "@/components/ui/button";
+import Input from "@/components/Input";
 import { Plus } from "lucide-react";
-import type { Status } from "@/src/features/toDo/types/toDo";
 import { useState } from "react";
+import DateInput from "@/components/DateInput";
 
 type AddToDoProps = {
-  onAdd: (title: string, status: Status) => void;
+  onAdd: (title: string, deadline: string) => void;
 };
 
 export default function AddToDo({ onAdd }: AddToDoProps) {
   const [toDoTitle, setToDoTitle] = useState<string>("");
-  const [toDoStatus, setToDoStatus] = useState<Status>("active");
+  const [toDoDeadline, setToDoDeadline] = useState<string>("");
   return (
-    <div className="flex flex-col items-center mt-10 gap-5 sm:flex-row sm:gap-6">
+    <div className="flex flex-col sm:items-center sm:justify-center mt-10 gap-5 sm:flex-row sm:gap-6">
       <Input
         placeholder="Add a new task..."
         value={toDoTitle}
         onChange={(e) => setToDoTitle(e.target.value)}
-        className="sm:w-99"
+        className="sm:w-70 md:w-99"
       />
-      <div className="flex items-center gap-6">
-        <Button
-          variant="active"
-          className={
-            toDoStatus !== "active" ? "opacity-60 hover:opacity-100" : ""
-          }
-          onClick={() => setToDoStatus("active")}
-        >
-          active
-        </Button>
 
-        <Button
-          variant="pending"
-          className={
-            toDoStatus !== "pending" ? "opacity-60 hover:opacity-100" : ""
-          }
-          onClick={() => setToDoStatus("pending")}
-        >
-          pending
-        </Button>
+      <DateInput
+        placeHolder="Deadline Date"
+        value={toDoDeadline}
+        onChange={setToDoDeadline}
+        wrapperClassName="sm:w-43"
+        minDate={new Date()}
+      />
 
-        <Button
-          variant="closed"
-          className={
-            toDoStatus !== "closed" ? "opacity-60 hover:opacity-100" : ""
-          }
-          onClick={() => setToDoStatus("closed")}
-        >
-          closed
-        </Button>
-      </div>
       <Button
         variant="add"
-        className="w-full sm:w-auto gap-0.5 justify-center"
+        size="toDoDefault"
         onClick={() => {
-          onAdd(toDoTitle, toDoStatus);
+          onAdd(toDoTitle, toDoDeadline);
           setToDoTitle("");
+          setToDoDeadline("");
         }}
         disabled={toDoTitle.trim() === ""}
       >

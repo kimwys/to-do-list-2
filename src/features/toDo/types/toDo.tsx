@@ -1,4 +1,4 @@
-export type Status = "active" | "pending" | "closed";
+export type Status = "active" | "overdue" | "completed";
 export type ToDo = {
   id: string;
   title: string;

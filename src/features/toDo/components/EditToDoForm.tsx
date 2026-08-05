@@ -4,10 +4,11 @@ import { useForm, Controller } from "react-hook-form";
 import {
   editToDoSchema,
   EditToDoFormValues,
-} from "@/src/features/toDo/schemas/editTodo.schema";
-import Input from "@/src/components/Input";
-import Button from "@/src/components/Button";
-import DateInput from "@/src/components/DateInput";
+} from "@/features/toDo/schemas/editTodo.schema";
+import Input from "@/components/Input";
+import { Button } from "@/components/ui/button";
+import DateInput from "@/components/DateInput";
+import { parse } from "date-fns";
 
 type EditToDoFormProps = {
   defaultValues?: EditToDoFormValues;
@@ -29,23 +30,28 @@ export default function EditToDoForm({
     await onSubmit(data);
     form.reset();
   };
-  const status = form.watch("status");
   return (
     <form
       onSubmit={form.handleSubmit(handleSubmit)}
       className="flex flex-col gap-4"
     >
       <div className="flex flex-col gap-2">
-        <label className="font-semibold text-gray-500">Title:</label>
+        <label className="font-semibold text-gray-500" htmlFor="title">
+          Title:
+        </label>
         <Input
+          id="title"
           {...form.register("title")}
           error={form.formState.errors.title?.message}
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <label className="font-semibold text-gray-500">Created Date:</label>
+        <label className="font-semibold text-gray-500" htmlFor="createdAt">
+          Created Date:
+        </label>
         <Input
+          id="createdAt"
           {...form.register("createdAt")}
           disabled
           className="disabled:bg-gray-300/70"
@@ -53,61 +59,30 @@ export default function EditToDoForm({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label className="font-semibold text-gray-500">Completed Date:</label>
+        <label className="font-semibold text-gray-500">Deadline Date:</label>
         <Controller
           control={form.control}
           name="doneAt"
           render={({ field }) => (
-            <DateInput value={field.value} onChange={field.onChange} />
+            <DateInput
+              value={field.value}
+              onChange={field.onChange}
+              minDate={
+                defaultValues?.createdAt
+                  ? parse(defaultValues.createdAt, "dd - MM - yyyy", new Date())
+                  : new Date()
+              }
+            />
           )}
         />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <div className="font-semibold text-gray-500">Status:</div>
-
-        <div className="flex items-center justify-center gap-2">
-          <Button
-            variant="active"
-            size="small"
-            type="button"
-            onClick={() => form.setValue("status", "active")}
-            className={
-              status !== "active" ? "opacity-60 hover:opacity-100" : ""
-            }
-          >
-            active
-          </Button>
-          <Button
-            variant="pending"
-            size="small"
-            type="button"
-            onClick={() => form.setValue("status", "pending")}
-            className={
-              status !== "pending" ? "opacity-60 hover:opacity-100" : ""
-            }
-          >
-            pending
-          </Button>
-          <Button
-            variant="closed"
-            size="small"
-            type="button"
-            onClick={() => form.setValue("status", "closed")}
-            className={
-              status !== "closed" ? "opacity-60 hover:opacity-100" : ""
-            }
-          >
-            closed
-          </Button>
-        </div>
       </div>
 
       <Button
         type="submit"
         disabled={form.formState.isSubmitting}
-        className="mt-2 justify-center"
+        className="mt-2"
         variant="update"
+        size="toDoDefault"
       >
         {buttonName}
       </Button>
